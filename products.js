@@ -37,6 +37,7 @@ async function fetchProducts() {
   <div class="product__details">
     <h3 class="product__details__title">${product.name}</h3>
     <span class="product__details__price">$${product.price}</span>
+    <button class="product__details__button" onclick="addToCart(${product.id})">Add to Cart</button>
    </div>
   </div>`;
       })
@@ -45,3 +46,5 @@ async function fetchProducts() {
   }
   
   renderProducts();
+
+  
