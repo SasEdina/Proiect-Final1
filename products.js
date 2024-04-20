@@ -37,7 +37,7 @@ async function fetchProducts() {
   <div class="product__details">
     <h3 class="product__details__title">${product.name}</h3>
     <span class="product__details__price">$${product.price}</span>
-    <button class="product__details__button" onclick="addToCart(${product.id})">Add to Cart</button>
+    <button class="product__details__button" onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
    </div>
   </div>`;
       })
@@ -46,5 +46,24 @@ async function fetchProducts() {
   }
   
   renderProducts();
+
+  function addToCart(name, price) {
+    cart.push({ name, price });
+    updateCartDisplay(); // Apelăm funcția pentru actualizarea afișării coșului de cumpărături
+}
+
+function updateCartDisplay() {
+    const cartElement = document.querySelector("#cart-items");
+    const cartCountElement = document.querySelector("#cart-count"); // Selectăm elementul pentru afișarea numărului total de produse
+    cartCountElement.textContent = cart.length; // Actualizăm conținutul cu lungimea coșului de cumpărături
+
+    cartElement.innerHTML = ""; // Curățăm conținutul coșului de cumpărături
+    cart.forEach(item => {
+        const itemElement = document.createElement("div");
+        itemElement.textContent = `${item.name} - $${item.price}`;
+        cartElement.appendChild(itemElement);
+    });
+}
+
 
   
